@@ -1,0 +1,14 @@
+<!-- here this html is used to display registration form-->
+
+<h1>registration</h1>
+
+
+<form method=POST" action="">
+
+    {% for field in form%}
+    {{field.label}}
+    {{field}} <!-- form object here from inscriptionPage function -->
+    {% endfor %}
+    <input type="submit" name=Inscription value="send">
+
+</form>

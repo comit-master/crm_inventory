@@ -22,8 +22,8 @@
 		<div class="card card-body">
 			<h5>Informations</h5>
 			<hr>
-			<p>Mail: </p>
-			<p>Phone: </p>
+			<p>Name: {{ customer.name }}</p>
+			<p>Phone: {{ customer.phone }}</p>
 		</div>
 	</div>
 
@@ -57,12 +57,27 @@
 			<table class="table table-sm">
 				<tr>
 					<th>Product</th>
-					<th>Category</th>
 					<th>Purchase Order Date</th>
 					<th>Status</th>
 					<th>Update</th>
 					<th>Delete</th>
 				</tr>
+
+				{% for order in order %}
+
+				<tr>
+					<th>{{order.product}}</th>
+
+					<th>{{order.date_creation}}</th>
+					<th>{{order.status}}</th>
+					<th><a href="">udpate</a> </th> <!--link-->
+					<th><a href="">delete</a></th> <!--link-->
+				</tr>
+
+
+				{% endfor %}
+
+
 
 			</table>
 		</div>

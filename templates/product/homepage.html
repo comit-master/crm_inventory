@@ -22,7 +22,7 @@
 				</tr>
 				{% for customer in customers %} <!-- for customer in my key created previously-->
 				<tr> <!-- tr here marks the end on each line-->
-				<th> {{customer.id}}</th>
+				<th> <a href="{% url 'customer' customer.id %}">{{customer.id}}<a/></th>
 				<th> {{customer.name}}</th>
 				<th> {{customer.phone}}</th>
 				</tr>
@@ -51,7 +51,7 @@
 				{% for order in orders %}
 				<tr>
 					<th> {{order.product}}</th> <!-- here i.<object_from_class> -->
-					<th> {{order.customer}}</th> <!-- double tags is mandatory> -->
+					<th> {{order.date_creation}}</th> <!-- double tags is mandatory> -->
 					<th> {{order.status}}</th> <!-- here take status the object with data and not the tuple STATUS-->
 					<th> {{order.date_creation}}</th>
 					<th> <a href=''> Update</a></th>

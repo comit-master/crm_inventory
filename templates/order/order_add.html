@@ -4,12 +4,16 @@
 
 {% block content %}
 
+<div class="row">
+    <div class="col-md-12" >
+        <div class="card card-body">
 <form action="" method="POST">
     {%  csrf_token %} <!-- we encrypt data to protect it-->
     {{order_form}} <!-- here the key not the value from my context-->
     <input type="submit" name="Send">
-
 </form>
-
+</div>
+    </div>
+        </div>
 
 {% endblock %}

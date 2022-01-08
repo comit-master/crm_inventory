@@ -58,8 +58,8 @@
 					<th> {{order.date_creation}}</th> <!-- double tags is mandatory> -->
 					<th> {{order.status}}</th> <!-- here take status the object with data and not the tuple STATUS-->
 					<th> {{order.date_creation}}</th>
-					<th> <a class='btn btn-sm btn-success' href="{% url 'add_order'  %}">Update<a/></th>
-					<th> <a class='btn btn-sm btn-danger' href="{% url 'add_order'  %}">Delete<a/></th>
+					<th> <a class='btn btn-sm btn-success' href="{% url 'modify_order' order.id  %}">Modify<a/> </th>
+					<th> <a class='btn btn-sm btn-danger' href="{% url 'delete_order' order.id %}"> Delete <a/> </th>
 
 
 				</tr>

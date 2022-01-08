@@ -3,6 +3,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Customer
+from order.filter import OrderFilter
 
 # Create your views here.
 def customer_list(request, pk):
@@ -12,6 +13,8 @@ def customer_list(request, pk):
     # first table works without all function, just with _set function but not the second table which retrieve
     # all data from customer as what he buys or the category
     order_total=order.count()
-    context={'customer':customer, 'order':order, 'order_count':order_total} #pk is used after in url and id in tag from html
+    myfilter= OrderFilter(request.GET, queryset=order)
+    order= myfilter.qs
+    context={'customer':customer, 'order':order, 'order_count':order_total, 'thefilter':myfilter} #pk is used after in url and id in tag from html
     return render(request, 'customer/client_list.html', context)
 

@@ -17,16 +17,25 @@
 			<table class="table table-sm">
 				<tr>
 					<th></th>
-					<th>Customers</th>
-					<th>Orders</th>
+					<th>Customer</th>
+					<th>Phone</th>
 				</tr>
+				{% for customer in customers %} <!-- for customer in my key created previously-->
+				<tr> <!-- tr here marks the end on each line-->
+				<th> {{customer.id}}</th>
+				<th> {{customer.name}}</th>
+				<th> {{customer.phone}}</th>
+				</tr>
+
+
+				{% endfor %}
 
 			</table>
 		</div>
 	</div>
 
 	<div class="col-md-7">
-		<h5>The last 5 orders </h5>
+		<h5> All Orders </h5>
 		<hr>
 		<div class="card card-body">
 			<a class="btn btn-primary  btn-sm btn-block" href="">Add Order</a>
@@ -35,9 +44,20 @@
 					<th>Product</th>
 					<th>Order date</th>
 					<th>Status</th>
+					<th>Creation date</th>
 					<th>Update</th>
 					<th>Delete</th>
 				</tr>
+				{% for order in orders %}
+				<tr>
+					<th> {{order.product}}</th> <!-- here i.<object_from_class> -->
+					<th> {{order.customer}}</th> <!-- double tags is mandatory> -->
+					<th> {{order.status}}</th> <!-- here take status the object with data and not the tuple STATUS-->
+					<th> {{order.date_creation}}</th>
+					<th> <a href=''> Update</a></th>
+					<th> <a href=''> Delete</a></th>
+				</tr>
+				{% endfor %}
 
 			</table>
 		</div>

@@ -9,6 +9,7 @@ class Order(models.Model):
     STATUS = (('en instance','en instance'),
               ('non livré','non livré'),
               ('livré','livré'))
+
 #here below we udpate relation
     # order is related to customer and product tank to ForeignKey function from models
     customer= models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)

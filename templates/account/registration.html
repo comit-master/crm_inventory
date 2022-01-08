@@ -5,8 +5,8 @@
 
 <form method=POST" action="">
 
-    {% for field in form%}
-    {{field.label}}
+    {% for field in form%} <!-- loop to put field in line  -->
+    {{field.label}} <!-- to add fields labels -->
     {{field}} <!-- form object here from inscriptionPage function -->
     {% endfor %}
     <input type="submit" name=Inscription value="send">

@@ -35,3 +35,9 @@ def getProduct(request,id):#displayinthepaththebooknumber
     serializer = ProductSerializer(product)
     return Response(serializer.data)
 #----------------------------------------------------------------------------------------
+@api_view(['POST'])
+def addProducts(request):
+    serializer = ProductSerializer(data= request.data, many=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)

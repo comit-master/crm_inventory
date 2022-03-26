@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('products/', views.allProducts),
     path('product/<int:id>', views.getProduct),
+    path('addproducts/', views.addProducts),
 
 
 ]

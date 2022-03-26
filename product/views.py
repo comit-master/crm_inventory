@@ -2,6 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from order.models import Order
 from customer.models import Customer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ProductSerializer
+from .models import Product
+
 
 
 # Create your views here.
@@ -16,3 +21,10 @@ def home(request):
     # to push this data To do that, I go in the template and use tags functions
 
 
+#api view
+@api_view(['GET'])
+def allProducts(request): 
+    products = Product.objects.all() #retrieve all products
+    serialization = ProductSerializer(products, many=True) #mchange format to json
+    return Response(serialization.data)
+#----------------------------------------------------------------------------------------

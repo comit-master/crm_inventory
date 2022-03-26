@@ -50,3 +50,12 @@ def updateProducts(request,id):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
+#-----------------------------------------------------------------------------------------
+@api_view(['DELETE'])
+def delProducts(request,id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return Response("Product has been removed ! ")
+
+
+

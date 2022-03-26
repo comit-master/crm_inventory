@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ProductSerializer
 from .models import Product
+from product import serializers
 
 
 
@@ -27,4 +28,10 @@ def allProducts(request):
     products = Product.objects.all() #retrieve all products
     serialization = ProductSerializer(products, many=True) #mchange format to json
     return Response(serialization.data)
+#----------------------------------------------------------------------------------------
+@api_view(['GET'])
+def getProduct(request,id):#displayinthepaththebooknumber
+    product = Product.objects.get(id=id) #retrieveproductid
+    serializer = ProductSerializer(product)
+    return Response(serializer.data)
 #----------------------------------------------------------------------------------------

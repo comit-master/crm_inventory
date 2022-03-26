@@ -12,6 +12,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('products/', views.allProducts),
+    path('product/<int:id>', views.getProduct),
 
 
 ]

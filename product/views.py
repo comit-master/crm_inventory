@@ -41,3 +41,12 @@ def addProducts(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
+
+#----------------------------------------------------------------------------------------
+@api_view(['PUT'])
+def updateProducts(request,id):
+    product = Product.objects.get(id=id)
+    serializer = ProductSerializer(instance = product, data= request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)

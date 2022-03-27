@@ -23,5 +23,6 @@ urlpatterns = [
     path('customerlist', include('customer.urls')),
     path('orderlist', include('order.urls')),
     path('account/', include('account.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
 
 ]

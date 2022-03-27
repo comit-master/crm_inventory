@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'order',
     'account',
     'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
 
 ]
 

@@ -2,6 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from order.models import Order
 from customer.models import Customer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ProductSerializer
+from .models import Product
+from product import serializers
+
 
 
 # Create your views here.
@@ -14,5 +20,42 @@ def home(request):
     return render(request, 'product/homepage.html', context)
     # Everything is like push with the template, but my template doesnt know where
     # to push this data To do that, I go in the template and use tags functions
+
+
+#api view
+@api_view(['GET'])
+def allProducts(request): 
+    products = Product.objects.all() #retrieve all products
+    serialization = ProductSerializer(products, many=True) #mchange format to json
+    return Response(serialization.data)
+#----------------------------------------------------------------------------------------
+@api_view(['GET'])
+def getProduct(request,id):#displayinthepaththebooknumber
+    product = Product.objects.get(id=id) #retrieveproductid
+    serializer = ProductSerializer(product)
+    return Response(serializer.data)
+#----------------------------------------------------------------------------------------
+@api_view(['POST'])
+def addProducts(request):
+    serializer = ProductSerializer(data= request.data, many=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+
+#----------------------------------------------------------------------------------------
+@api_view(['PUT'])
+def updateProducts(request,id):
+    product = Product.objects.get(id=id)
+    serializer = ProductSerializer(instance = product, data= request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+#-----------------------------------------------------------------------------------------
+@api_view(['DELETE'])
+def delProducts(request,id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return Response("Product has been removed ! ")
+
 
 

@@ -18,9 +18,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('product.urls')),
     path('', include('product.urls')),
     path('customerlist', include('customer.urls')),
     path('orderlist', include('order.urls')),
     path('account/', include('account.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
 
 ]

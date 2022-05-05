@@ -1,0 +1,53 @@
+image: ruby:latest
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  only: 
+    - develop
+  before_script:
+    - gem install dpl
+    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  script:
+    - dpl --provider=heroku --app=$HEROKU_APPNAME_DEV --api-key=$HEROKU_APIKEY
+    - export ENV=DEBUG
+    - heroku run --app=$HEROKU_APPNAME_DEV python manage.py test
+
+Deployment:
+  stage: deploy
+# only spécifie le nom de la branche où gitlab doit aller chercher le code à deployer.
+  only:
+      # PRE-PROD
+    - develop
+  before_script:
+    - gem install dpl
+    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  script:
+    - dpl --provider=heroku --app=$HEROKU_APPNAME_DEV --api-key=$HEROKU_APIKEY
+    - export HEROKU_API_KEY=$HEROKU_APIKEY
+    - export ENV=DEBUG
+    - heroku run --app=$HEROKU_APPNAME_DEV python manage.py migrate
+  environment:
+    name: development
+    url: $HEROKU_APP_HOST_DEV
+
+Release :
+  stage: deploy
+# only spécifie le nom de la branche où gitlab doit aller chercher le code à deployer.
+  only:
+      # PROD
+    - master
+  before_script:
+    - gem install dpl
+    - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  script:
+    - dpl --provider=heroku --app=$HEROKU_APPNAME_PROD --api-key=$HEROKU_APIKEY
+    - export HEROKU_API_KEY=$HEROKU_APIKEY
+    - export ENV=PROD
+    - heroku run --app=$HEROKU_APPNAME_DEV python manage.py migrate
+  environment:
+    name: production
+    url: $HEROKU_APP_HOST_PROD
